@@ -26,6 +26,9 @@
       <version.camel.components>2.15.1.redhat-620133</version.camel.components>
       <version.org.infinispan>6.3.1.Final-redhat-1</version.org.infinispan>
       <version.camel-jbossdatagrid>6.5.1.Final-redhat-1</version.camel-jbossdatagrid>
+      
+      <karaf.version>4.0.8</karaf.version>
+      <camel.version>${version.camel.components}</camel.version>
    </properties>
     
     <modules>

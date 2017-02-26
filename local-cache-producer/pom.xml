@@ -31,6 +31,53 @@
                 </instructions>
              </configuration>
           </plugin>
+          
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <version>${karaf.version}</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>karaf-assembly</id>
+            <goals>
+              <goal>assembly</goal>
+              <goal>archive</goal>
+            </goals>
+            <phase>install</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <javase>1.8</javase>
+          <karafVersion>v4x</karafVersion>
+          <useReferenceUrls>true</useReferenceUrls>
+          <archiveTarGz>true</archiveTarGz>
+          <includeBuildOutputDirectory>false</includeBuildOutputDirectory>
+          <startupFeatures>
+            <feature>framework</feature>
+            <feature>scr</feature>
+            <feature>jaas</feature>
+            <feature>aries-blueprint</feature>
+            <feature>camel-blueprint</feature>
+            <feature>fabric8-karaf-blueprint</feature>
+            <feature>fabric8-karaf-checks</feature>
+            <feature>camel-bindy</feature>
+          </startupFeatures>
+          <startupBundles>
+            <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version};start-level=80</bundle>
+            <bundle>mvn:org.jboss.quickstarts.jdg/pojos/${project.version}</bundle>
+          </startupBundles>
+          <blacklistedBundles>
+            <bundle>camel-karaf-commands;url="mvn:org.apache.camel.karaf/camel-karaf-commands/${camel.version}"</bundle>
+            <bundle>camel-karaf-commands-catalog;url="mvn:org.apache.camel.karaf/camel-karaf-commands-catalog/${camel.version}"</bundle>
+          </blacklistedBundles>
+          <libraries>
+            <library>
+              mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.boot/${karaf.version};type:=boot;export:=true;delegate:=true
+            </library>
+          </libraries>
+        </configuration>
+      </plugin>
         </plugins>
     </build>     
 </project>
